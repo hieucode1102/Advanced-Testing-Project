@@ -1,0 +1,89 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <title>Add Nhân Viên</title>
+</head>
+<body>
+<div class="container">
+    <div class="row" style="border: 1px darkgrey solid; border-radius: 10px;width: 50%; margin: 0 auto; padding: 20px;">
+        <div class="col-sm-12">
+            <form action="/addNV" method="post" >
+                <h1 class="mt-5 mb-5 text-center">Thêm Nhân Viên</h1>
+                <div class="form-group">
+                    <h3 class="mb-2">Mã Nhân Viên:</h3>
+                    <input type="text" class="form-control" name="ma" value="${NV.ma}" placeholder="Enter Ma Nhan Vien">
+                    <p style="color:red;">${LOI_MA}</p>
+                </div>
+                <div class="form-group">
+                    <h3 class="mb-2">Tên Nhân Viên:</h3>
+                    <input type="text" class="form-control" name="ten" value="${NV.ten}"  placeholder="Enter Ten Khach Hang">
+                </div>
+                <div class="form-group">
+                    <h3 class="mb-2">Tên Đệm:</h3>
+                    <input type="text" class="form-control" name="tenDem" value="${NV.tenDem}" placeholder="Enter Ten Dem Nhan Vien">
+                </div>
+                <div class="form-group">
+                    <h3 class="mb-2">Họ:</h3>
+                    <input type="text" class="form-control" name="ho" value="${NV.ho}" placeholder="Enter Ho Nhan Vien">
+                </div>
+                <div class="form-group">
+                    <h3 class="mb-2">Giới tính</h3>
+                    <label class="checkbox-inline"><input type="radio" value="Nam"  <c:if test="${NV.gioiTinh=='Nam'}">checked</c:if> checked name="gioiTinh">Nam</label>
+                    <label class="checkbox-inline"><input type="radio"  value="Nữ" <c:if test="${NV.gioiTinh=='Nữ'}">checked</c:if> name="gioiTinh">Nữ</label>
+                </div>
+                <div class="form-group">
+                    <h3 class="mb-2">Ngày Sinh:</h3>
+                    <f:formatDate value="${NV.ngaySinh}" pattern="yyyy-MM-dd" var="formattedDate"/>
+                    <input type="date" class="form-control" name="ngaySinh" value="${formattedDate}"  placeholder="Enter Ngay Sinh">
+                </div>
+                <div class="form-group">
+                    <h3 class="mb-2">Địa Chỉ:</h3>
+                    <input type="text" class="form-control" name="diaChi" value="${NV.diaChi}"  placeholder="Enter Dia Chi">
+                </div>
+                <div class="form-group">
+                    <h3 class="mb-2">Số điện thoại:</h3>
+                    <input type="tel" class="form-control" name="sdt" value="${NV.sdt}"  placeholder="Enter So Dien Thoai">
+                    <p style="color: red">${LOI_SDT}</p>
+                </div>
+                <div class="form-group">
+                    <h3 class="mb-2">Mật khẩu:</h3>
+                    <input type="text" class="form-control" name="matKhau" value="${NV.matKhau}" placeholder="Enter Mat Khau">
+                </div>
+                <div class="form-group">
+                    <h3 class="mb-2">Cửa Hàng:</h3>
+
+                        <select class="form-control" name="cuaHang.id" required>
+                            <c:forEach var="ch" items="${LIST_CH}">
+                            <option value="${ch.id}" <c:if test="${ch.id==NV.cuaHang.id}">selected</c:if>>${ch.ten}</option>
+                            </c:forEach>
+                        </select>
+
+                </div>
+                <div class="form-group">
+                    <h3 class="mb-2">Chức Vụ:</h3>
+                        <select class="form-control" name="chucVu.id" required>
+                            <c:forEach var="cv" items="${LIST_CV}">
+                            <option value="${cv.id}" <c:if test="${cv.id==NV.chucVu.id}">selected</c:if>>${cv.ten}</option>
+                            </c:forEach>
+                        </select>
+
+                </div>
+
+
+                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="reset" class="btn btn-danger">Cancel</button>
+                <a href="/NhanVienServlet" class="btn btn-primary">Display Nhan Vien</a>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
